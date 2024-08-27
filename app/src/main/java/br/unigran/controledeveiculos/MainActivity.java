@@ -2,9 +2,14 @@ package br.unigran.controledeveiculos;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
     Button bRemover;
     Button bSair;
     ListView lista;
+    Veiculo veiculoSelecionado;
 
-    ArrayAdapter adapter;
+    ArrayAdapter<Veiculo> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +39,21 @@ public class MainActivity extends AppCompatActivity {
         bSair=findViewById(R.id.btnSair);
         lista = findViewById(R.id.lista);
 
-        adapter =
-                new ArrayAdapter(MainActivity.this, R.layout.linha ,Dados.getInstance().lista);
+        adapter = new ArrayAdapter<Veiculo>(this, R.layout.linha, Dados.getInstance().lista) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                if (convertView == null) {
+                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.linha, parent, false);
+                }
+
+                Veiculo veiculo = getItem(position);
+
+                TextView textView = convertView.findViewById(R.id.textView);
+                textView.setText(veiculo.toString());
+
+                return convertView;
+            }
+        };
         lista.setAdapter(adapter);
 
 
@@ -44,6 +63,18 @@ public class MainActivity extends AppCompatActivity {
         });
         bSair.setOnClickListener(v->{
             finish();
+        });
+        //torna a listview selecionavel
+        lista.setOnItemClickListener((parent, view, position, id) -> {
+            veiculoSelecionado = (Veiculo) parent.getItemAtPosition(position);
+        });
+
+        bRemover.setOnClickListener(v->{
+            if (veiculoSelecionado != null) {
+                Dados.getInstance().lista.remove(veiculoSelecionado);
+                adapter.notifyDataSetChanged();
+                veiculoSelecionado = null;
+            }
         });
     }
 

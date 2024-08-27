@@ -14,6 +14,7 @@
         android:layout_marginStart="33dp"
         android:layout_marginTop="25dp"
         android:background="#9C27B0"
+        android:textColor="#000000"
         android:text="Sair"
         app:layout_constraintStart_toEndOf="@+id/btnRemover"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +26,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="33dp"
         android:background="#9C27B0"
+        android:textColor="#000000"
         android:text="Remover"
         app:layout_constraintEnd_toStartOf="@+id/btnSair"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,6 +49,7 @@
         android:id="@+id/lista"
         android:layout_width="409dp"
         android:layout_height="656dp"
+        android:choiceMode="singleChoice"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

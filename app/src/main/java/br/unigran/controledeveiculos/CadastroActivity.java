@@ -1,5 +1,6 @@
 package br.unigran.controledeveiculos;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class CadastroActivity extends AppCompatActivity {
 
     //Criando variáveis Globais
-    EditText texto;
+    EditText carroMarca,carroModelo,carroAno;
     Button bsalvar;
     Button bvoltar;
 
@@ -19,7 +20,9 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         //Instancias de botões
-        texto =findViewById(R.id.nomeVeiculo);
+        carroMarca =findViewById(R.id.marca);
+        carroModelo = findViewById(R.id.modelo);
+        carroAno = findViewById(R.id.ano);
         bvoltar = findViewById(R.id.btnVoltar);
         bsalvar = findViewById(R.id.btnSalvar);
 
@@ -27,10 +30,16 @@ public class CadastroActivity extends AppCompatActivity {
         bvoltar.setOnClickListener(v->{onBackPressed();});
 
         bsalvar.setOnClickListener(v-> {
+            if (!(carroMarca.getText().toString().isEmpty()|| carroModelo.getText().toString().isEmpty()|| carroAno.getText().toString().isEmpty())){
             Veiculo veiculo = new Veiculo();
+
+            veiculo.marca =carroMarca.getText().toString();
+            veiculo.modelo = carroModelo.getText().toString();
+            veiculo.ano = carroAno.getText().toString();
             Dados d = new Dados();
-            veiculo.nome=texto.getText().toString();
-            d.salvar(  veiculo);
+            d.getInstance().salvar( veiculo);
+            finish();
+            }
         });
     }
 }
