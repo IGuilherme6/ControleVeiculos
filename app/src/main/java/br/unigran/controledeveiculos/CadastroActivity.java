@@ -4,11 +4,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -20,9 +16,10 @@ public class CadastroActivity extends AppCompatActivity {
     @Override  //Ao Abrir o App
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cadastro);
 
         //Instancias de botões
-        texto=findViewById(R.id.editTextText);
+        texto =findViewById(R.id.nomeVeiculo);
         bvoltar = findViewById(R.id.btnVoltar);
         bsalvar = findViewById(R.id.btnSalvar);
 
@@ -31,8 +28,9 @@ public class CadastroActivity extends AppCompatActivity {
 
         bsalvar.setOnClickListener(v-> {
             Veiculo veiculo = new Veiculo();
+            Dados d = new Dados();
             veiculo.nome=texto.getText().toString();
-            Dados.lista.add(veiculo);
+            d.salvar(  veiculo);
         });
     }
 }

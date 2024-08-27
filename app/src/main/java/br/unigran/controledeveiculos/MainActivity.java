@@ -25,13 +25,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         //Criando Instancias dos IDs
         bNovo = findViewById(R.id.btnNovo);
         bRemover=findViewById(R.id.btnRemover);
         bSair=findViewById(R.id.btnSair);
+        lista = findViewById(R.id.lista);
 
-        adapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,Dados.lista);
+        adapter =
+                new ArrayAdapter(MainActivity.this, R.layout.linha ,Dados.getInstance().lista);
         lista.setAdapter(adapter);
 
 

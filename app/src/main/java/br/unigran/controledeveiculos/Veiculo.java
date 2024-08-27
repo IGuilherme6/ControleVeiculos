@@ -7,7 +7,7 @@ public String nome;
 public String placa;
 public String modelo;
 
-@NonNull
+    @NonNull
     @Override
     public String toString(){
     return nome;
